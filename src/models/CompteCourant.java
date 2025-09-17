@@ -22,5 +22,16 @@ public class CompteCourant extends Compte {
         return false;
     }
 
+    public boolean verser(float montant) {
+        if (montant > 0) {
+            solde += montant;
+            listeOperations.add("versement de: " + montant); // listeOperations.add(new Versement(montant, source));
+            return true;
+        }
+        return false;
+    }
+
+
+
 }
 
