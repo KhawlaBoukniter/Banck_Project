@@ -31,7 +31,10 @@ public class CompteCourant extends Compte {
         return false;
     }
 
-
+    public float calculerInteret() {
+        listeOperations.add("Calcul d'intérêts.");
+        return 0;
+    }
 
 }
 
