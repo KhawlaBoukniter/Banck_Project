@@ -13,7 +13,14 @@ public class CompteCourant extends Compte {
         this.decouvert = newDecouvert;
     }
 
-
+    public boolean retirer(float montant) {
+        if (solde - montant >= -decouvert) {
+            solde -= montant;
+            listeOperations.add("retrait de: " + montant); // listeOperations.add(new Retrait(montant, destination));
+            return true;
+        }
+        return false;
+    }
 
 }
 
