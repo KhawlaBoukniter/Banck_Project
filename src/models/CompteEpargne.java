@@ -21,6 +21,15 @@ public class CompteEpargne extends Compte {
         }
     }
 
+    public boolean verser(float montant) {
+        if (montant > 0) {
+            solde += montant;
+            listeOperations.add("versement de: " + montant);
+            return true;
+        }
+        return false;
+
+    }
 
 
 }
