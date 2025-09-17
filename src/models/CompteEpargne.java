@@ -11,6 +11,16 @@ public class CompteEpargne extends Compte {
         this.tauxInteret = newTauxInteret;
     }
 
+    public boolean retirer(float montant) {
+        if (montant <= solde) {
+            solde -= montant;
+            listeOperations.add("Retrait de: " + montant);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 
 }
