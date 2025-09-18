@@ -13,26 +13,43 @@ public class CompteCourant extends Compte {
         this.decouvert = newDecouvert;
     }
 
-    public boolean retirer(Double montant) {
+    public Boolean retirer(Double montant) {
         if (solde - montant >= -decouvert) {
             solde -= montant;
-            listeOperations.add("retrait de: " + montant); // listeOperations.add(new Retrait(montant, destination));
+            listeOperations.add(new Retrait(montant));
             return true;
         }
         return false;
     }
 
-    public boolean verser(Double montant) {
+    public Boolean retirer(Double montant, String destination) {
+        if (solde - montant >= -decouvert) {
+            solde -= montant;
+            listeOperations.add(new Retrait(montant, destination));
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean verser(Double montant) {
         if (montant > 0) {
             solde += montant;
-            listeOperations.add("versement de: " + montant); // listeOperations.add(new Versement(montant, source));
+            listeOperations.add(new Versement(montant));
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean verser(Double montant, String source) {
+        if (montant > 0) {
+            solde += montant;
+            listeOperations.add(new Versement(source, montant));
             return true;
         }
         return false;
     }
 
     public Double calculerInteret() {
-        listeOperations.add("Calcul d'intérêts.");
         return 0.0;
     }
 
