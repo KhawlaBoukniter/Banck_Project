@@ -131,4 +131,29 @@ public class CompteController {
         System.out.println("Versement effectué. Votre solde est: " + compteModel.getSolde());
     }
 
+    private void retirerMenu() {
+        System.out.print("Montant à retirer : ");
+        Double montant = sc.nextDouble();
+        sc.nextLine();
+
+        if (montant <= 0) {
+            System.out.println("Montant invalide !");
+            return;
+        }
+
+        boolean success = false;
+        if (compteModel instanceof CompteCourant) {
+            success = ((CompteCourant) compteModel).retirer(montant);
+        } else if (compteModel instanceof CompteEpargne) {
+            success = ((CompteEpargne) compteModel).retirer(montant);
+        }
+
+        if (success) {
+            System.out.println("Retrait effectué. Votre nouveau solde est: " + compteModel.getSolde());
+        } else {
+            System.out.println("Opération refusée.");
+        }
+    }
+
+
 }
