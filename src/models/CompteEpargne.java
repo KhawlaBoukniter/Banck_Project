@@ -1,17 +1,17 @@
 package models;
 
 public class CompteEpargne extends Compte {
-    private float tauxInteret = 0.02f;
+    private Double tauxInteret;
 
-    public float getTauxInteret() {
+    public Double getTauxInteret() {
         return tauxInteret;
     }
 
-    public void setTauxInteret(float newTauxInteret) {
+    public void setTauxInteret(Double newTauxInteret) {
         this.tauxInteret = newTauxInteret;
     }
 
-    public boolean retirer(float montant) {
+    public boolean retirer(Double montant) {
         if (montant <= solde) {
             solde -= montant;
             listeOperations.add("Retrait de: " + montant);
@@ -21,7 +21,7 @@ public class CompteEpargne extends Compte {
         }
     }
 
-    public boolean verser(float montant) {
+    public boolean verser(Double montant) {
         if (montant > 0) {
             solde += montant;
             listeOperations.add("versement de: " + montant);
@@ -31,5 +31,8 @@ public class CompteEpargne extends Compte {
 
     }
 
+    public Double calculerInteret() {
+        return solde * tauxInteret;
+    }
 
 }
