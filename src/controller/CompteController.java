@@ -189,5 +189,16 @@ public class CompteController {
         }
     }
 
+    public void afficherDetails() {
+        System.out.println("\nDétails du compte");
+        System.out.println("Code : " + compteModel.getCode());
+        System.out.println("Solde : " + compteModel.getSolde());
+
+        if (compteModel instanceof CompteEpargne) {
+            System.out.println("Votre taux d'intérêts est: " + ((CompteEpargne) compteModel).getTauxInteret());
+        } else {
+            System.out.println("Votre decouvert est: " + ((CompteCourant) compteModel).getDecouvert());
+        }
+    }
 
 }
