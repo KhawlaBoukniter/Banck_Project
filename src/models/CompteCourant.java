@@ -3,17 +3,17 @@ package models;
 import java.util.ArrayList;
 
 public class CompteCourant extends Compte {
-    private double decouvert;
+    private Double decouvert;
 
-    public double getDecouvert() {
+    public Double getDecouvert() {
         return decouvert;
     }
 
-    public void setDecouvert(double newDecouvert) {
+    public void setDecouvert(Double newDecouvert) {
         this.decouvert = newDecouvert;
     }
 
-    public boolean retirer(float montant) {
+    public boolean retirer(Double montant) {
         if (solde - montant >= -decouvert) {
             solde -= montant;
             listeOperations.add("retrait de: " + montant); // listeOperations.add(new Retrait(montant, destination));
@@ -22,7 +22,7 @@ public class CompteCourant extends Compte {
         return false;
     }
 
-    public boolean verser(float montant) {
+    public boolean verser(Double montant) {
         if (montant > 0) {
             solde += montant;
             listeOperations.add("versement de: " + montant); // listeOperations.add(new Versement(montant, source));
@@ -31,7 +31,7 @@ public class CompteCourant extends Compte {
         return false;
     }
 
-    public float calculerInteret() {
+    public Double calculerInteret() {
         listeOperations.add("Calcul d'intérêts.");
         return 0;
     }
