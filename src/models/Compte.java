@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Compte {
-    protected float solde;
+    protected Double solde;
     protected String code;
     protected ArrayList<String> listeOperations = new ArrayList<>(); // ArrayList<Operation> listeOperations
-    public static int compteur = 11111;
 
     public String getCode() {
         return code;
     }
 
-    public float getSolde() {
+    public Double getSolde() {
         return solde;
     }
 
@@ -25,7 +24,7 @@ public abstract class Compte {
         this.code = newCode;
     }
 
-    public void setSolde(float newSolde) {
+    public void setSolde(Double newSolde) {
         this.solde = newSolde;
     }
 
@@ -33,10 +32,21 @@ public abstract class Compte {
         this.listeOperations = listeOperations;
     }
 
-    public abstract boolean retirer(float montant);
-    public abstract boolean verser(float montant);
-    public abstract float calculerInteret();
+    public abstract boolean retirer(Double montant);
+    public abstract boolean verser(Double montant);
+    public abstract Double calculerInteret();
 
+    public boolean afficherDetails() {
+        return !listeOperations.isEmpty();
+    }
 
+    public String generateCode() {
+        Random random = new Random();
+        Integer randomCode = 10000 + random.nextInt(90000);
+
+        String codeCompte = String.format("CPT-" + randomCode);
+
+        return codeCompte;
+    }
 
 }
