@@ -38,4 +38,6 @@ public abstract class Operation {
         this.montant = newMontant;
     }
 
+    public abstract String getOperation();
+
 }
