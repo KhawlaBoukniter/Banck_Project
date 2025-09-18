@@ -48,4 +48,21 @@ public class CompteController {
         return compteController;
     }
 
+    public void fstMenu() {
+        askAccountType();
+        System.out.println("\nChoisissez votre action");
+        System.out.println("1. Créer un nouveau compte");
+        System.out.println("2. Gérer un compte existant");
+        System.out.print("Votre choix: ");
+
+        Integer fstChoice = sc.nextInt();
+        sc.nextLine();
+
+        if (fstChoice == 1) {
+            askAccountType();
+        } else {
+            menu();
+        }
+    }
+
 }
