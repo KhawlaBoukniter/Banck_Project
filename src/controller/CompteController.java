@@ -201,4 +201,10 @@ public class CompteController {
         }
     }
 
+    public void afficherOperations() {
+        System.out.println("Les opérations effectuées sur ce compte:");
+        for (String op: compteModel.getListeOperations()) {
+            System.out.println(op + " , ");
+        }
+    }
 }
