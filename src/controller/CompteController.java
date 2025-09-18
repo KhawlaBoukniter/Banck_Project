@@ -112,4 +112,23 @@ public class CompteController {
         } while (choix != 8);
     }
 
+    private void verserMenu() {
+        System.out.print("Veuillez entrer le montant à verser : ");
+        Double montant = sc.nextDouble();
+        sc.nextLine();
+
+        if (montant <= 0) {
+            System.out.println("Montant invalide !");
+            return;
+        }
+
+        if (compteModel instanceof CompteCourant) {
+            ((CompteCourant) compteModel).verser(montant);
+        } else if (compteModel instanceof CompteEpargne) {
+            ((CompteEpargne) compteModel).verser(montant);
+        }
+
+        System.out.println("Versement effectué. Votre solde est: " + compteModel.getSolde());
+    }
+
 }
