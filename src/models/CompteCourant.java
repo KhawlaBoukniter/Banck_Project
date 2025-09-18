@@ -33,7 +33,7 @@ public class CompteCourant extends Compte {
 
     public Double calculerInteret() {
         listeOperations.add("Calcul d'intérêts.");
-        return 0;
+        return 0.0;
     }
 
 }
