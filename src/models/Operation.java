@@ -14,4 +14,28 @@ public abstract class Operation {
         this.montant = montant;
     }
 
+    public UUID getNumero() {
+        return numero;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public Double getMontant() {
+        return montant;
+    }
+
+    public void setNumero(UUID newNumero) {
+        this.numero = newNumero;
+    }
+
+    public void setDate(LocalDateTime newDate) {
+        this.date = newDate;
+    }
+
+    public void setMontant(Double newMontant) {
+        this.montant = newMontant;
+    }
+
 }
