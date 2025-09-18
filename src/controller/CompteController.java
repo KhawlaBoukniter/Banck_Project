@@ -65,4 +65,51 @@ public class CompteController {
         }
     }
 
+    public void menu() {
+        Integer choix = 0;
+        do {
+            System.out.println("\nMENU COMPTE " + compteModel.getCode());
+            System.out.println("1. Effectuer un versement");
+            System.out.println("2. Effectuer un retrait");
+            System.out.println("3. Effectuer un virement vers un autre compte");
+            System.out.println("4. Consulter votre solde");
+            System.out.println("5. Afficher les détails du compte");
+            System.out.println("6. Consulter les opérations");
+            System.out.println("7. Calculer intérêts");
+            System.out.println("8. Quitter");
+            System.out.print("Votre choix : ");
+            choix = sc.nextInt();
+            sc.nextLine();
+
+            switch (choix) {
+                case 1:
+                    verserMenu();
+                    break;
+                case 2:
+                    retirerMenu();
+                    break;
+                case 3:
+                    virementMenu();
+                    break;
+                case 4:
+                    System.out.println("Solde actuel : " + compteModel.getSolde());
+                    break;
+                case 5:
+                    afficherDetails();
+                    break;
+                case 6:
+                    afficherOperations();
+                    break;
+                case 7:
+                    System.out.println("Intérêts : " + compteModel.calculerInteret());
+                    break;
+                case 8:
+                    System.out.println("Merci d'avoir utilisé notre application");
+                    break;
+                default:
+                    System.out.println("Choix invalide");
+            }
+        } while (choix != 8);
+    }
+
 }
