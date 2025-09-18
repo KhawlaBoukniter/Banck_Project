@@ -6,7 +6,7 @@ import java.util.Random;
 public abstract class Compte {
     protected Double solde;
     protected String code;
-    protected ArrayList<String> listeOperations = new ArrayList<>(); // ArrayList<Operation> listeOperations
+    protected ArrayList<Operation> listeOperations = new ArrayList<>();
 
     public String getCode() {
         return code;
@@ -16,7 +16,7 @@ public abstract class Compte {
         return solde;
     }
 
-    public ArrayList<String> getListeOperations() {
+    public ArrayList<Operation> getListeOperations() {
         return listeOperations;
     }
 
@@ -28,12 +28,12 @@ public abstract class Compte {
         this.solde = newSolde;
     }
 
-    public void setListeOperations(ArrayList<String> listeOperations) {
+    public void setListeOperations(ArrayList<Operation> listeOperations) {
         this.listeOperations = listeOperations;
     }
 
-    public abstract boolean retirer(Double montant);
-    public abstract boolean verser(Double montant);
+    public abstract Boolean retirer(Double montant);
+    public abstract Boolean verser(Double montant);
     public abstract Double calculerInteret();
 
     public boolean afficherDetails() {
