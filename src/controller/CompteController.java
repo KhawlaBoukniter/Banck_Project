@@ -155,5 +155,39 @@ public class CompteController {
         }
     }
 
+    private void virementMenu() {
+        System.out.print("Veuillez entrer le montant à virer: ");
+        Double montant = sc.nextDouble();
+        sc.nextLine();
+
+        System.out.print("Veuillez entrer le code du compte destinataire : ");
+        String codeDest = sc.nextLine();
+
+        if (!comptes.containsKey(codeDest)) {
+            System.out.println("Compte destinataire introuvable.");
+            return;
+        }
+
+        CompteController dest = comptes.get(codeDest);
+        boolean success = false;
+
+        if (compteModel instanceof CompteCourant) {
+            success = ((CompteCourant) compteModel).retirer(montant);
+        } else if (compteModel instanceof CompteEpargne) {
+            success = ((CompteEpargne) compteModel).retirer(montant);
+        }
+
+        if (success) {
+            if (dest.compteModel instanceof CompteCourant) {
+                ((CompteCourant) dest.compteModel).verser(montant);
+            } else if (dest.compteModel instanceof CompteEpargne) {
+                ((CompteEpargne) dest.compteModel).verser(montant);
+            }
+            System.out.println("Virement effectué");
+        } else {
+            System.out.println("Solde insuffisant.");
+        }
+    }
+
 
 }
