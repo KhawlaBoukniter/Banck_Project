@@ -1,13 +1,15 @@
 package models;
 
-public class Retrait {
+public class Retrait extends Operation {
     private String destination;
 
-    public String getDestination() {
-        return destination;
+    public Retrait(Double montant, String destination) {
+        super(montant);
+        this.destination = destination;
     }
 
-    public void setDestination(String newDestination) {
-        this.destination = newDestination;
+    @Override
+    public String getOperation() {
+        return "Retrait de: " + getMontant() + " vers " + destination + " le " + getDate();
     }
 }
