@@ -16,4 +16,36 @@ public class CompteController {
     public CompteController(Compte compteModel) {
         this.compteModel = compteModel;
     }
+
+    public static CompteController askAccountType() {
+        System.out.println("Choisissez le type de votre compte ?");
+        System.out.println("1. Compte courant");
+        System.out.println("2. Compte épargne");
+
+        Integer choix = sc.nextInt();
+        sc.nextLine();
+
+        Compte compte;
+        if (choix == 1) {
+            System.out.print("Veuillez entrer la découvert: ");
+            Double decouvert = sc.nextDouble();
+            sc.nextLine();
+            compte = new CompteCourant();
+            ((CompteCourant) compte).setDecouvert(decouvert);
+        } else {
+            System.out.print("Veuillez entrer le taux d'intérêts: ");
+            Double taux = sc.nextDouble();
+            sc.nextLine();
+            compte = new CompteEpargne();
+            ((CompteEpargne) compte).setTauxInteret(taux);
+        }
+
+        compte.setCode(compte.generateCode());
+        CompteController compteController = new CompteController(compte);
+        comptes.put(compte.getCode(), compteController);
+
+        System.out.println("Compte créé avec succès ! Votre code compte est  : " + compte.getCode());
+        return compteController;
+    }
+
 }
