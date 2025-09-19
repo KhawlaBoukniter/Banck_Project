@@ -195,14 +195,25 @@ public class CompteController {
     }
 
     private void verserMenu() {
-        System.out.print("Veuillez entrer le montant à verser : ");
-        Double montant = sc.nextDouble();
-        sc.nextLine();
+        Double montant = null;
 
-        if (montant <= 0) {
-            System.out.println("Montant invalide !");
-            return;
-        }
+        do {
+            try {
+                System.out.print("Veuillez entrer le montant à verser : ");
+                montant = sc.nextDouble();
+                sc.nextLine();
+
+                if (montant <= 0) {
+                    System.out.println("Montant invalide !");
+                    montant = null;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Entrer un montant suppérieur à 0");
+                montant = sc.nextDouble();
+                sc.nextLine();
+            }
+        } while (montant == null);
+
 
         if (compteModel instanceof CompteCourant) {
             ((CompteCourant) compteModel).verser(montant);
