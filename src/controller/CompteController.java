@@ -225,14 +225,33 @@ public class CompteController {
     }
 
     private void retirerMenu() {
-        System.out.print("Montant à retirer : ");
-        Double montant = sc.nextDouble();
-        sc.nextLine();
+        Double montant = null;
 
-        if (montant <= 0) {
-            System.out.println("Montant invalide !");
-            return;
-        }
+        do {
+            try {
+                System.out.print("Montant à retirer : ");
+                montant = sc.nextDouble();
+                sc.nextLine();
+
+                if (compteModel instanceof CompteCourant) {
+                    if (montant <= 0 || (montant > compteModel.getSolde() + ((CompteCourant) compteModel).getDecouvert() && compteModel.getSolde() <= 0)) {
+                        System.out.println("Montant invalide");
+                        montant = null;
+                    }
+                } else {
+                    if (montant <= 0 || montant > compteModel.getSolde()) {
+                        System.out.println("Montant invalide");
+                        montant = null;
+                    }
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Entrer un montant suppérieur à 0");
+                montant = sc.nextDouble();
+                sc.nextLine();
+            }
+        } while (montant == null);
+
 
         boolean success = false;
         if (compteModel instanceof CompteCourant) {
@@ -249,17 +268,39 @@ public class CompteController {
     }
 
     private void virementMenu() {
-        System.out.print("Veuillez entrer le montant à virer: ");
-        Double montant = sc.nextDouble();
-        sc.nextLine();
+        Double montant = null;
+        String codeDest= null;
 
-        System.out.print("Veuillez entrer le code du compte destinataire : ");
-        String codeDest = sc.nextLine();
+        do {
+            try {
+                System.out.print("Veuillez entrer le montant à virer: ");
+                montant = sc.nextDouble();
+                sc.nextLine();
 
-        if (!comptes.containsKey(codeDest)) {
-            System.out.println("Compte destinataire introuvable.");
-            return;
-        }
+                if (montant < 0) {
+                    System.out.println("Montant invalide");
+                    montant = null;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Entrer un montant suppérieur à 0");
+                montant = sc.nextDouble();
+            }
+        } while (montant == null);
+
+        do {
+            try {
+                System.out.print("Veuillez entrer le code du compte destinataire : ");
+                codeDest = sc.nextLine();
+
+                if (!comptes.containsKey(codeDest)) {
+                    System.out.println("Compte destinataire introuvable.");
+                    codeDest = null;
+                }
+            } catch (InputMismatchException e) {
+                System.out.print("Entrer un code valide: ");
+                codeDest = sc.nextLine();
+            }
+        } while (codeDest == null);
 
         System.out.println("Veullez entrer la destination (ex: 'Distributeur ATM', 'Chèque', 'Virement sortant')");
         String destination = sc.nextLine();
