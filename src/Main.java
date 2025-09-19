@@ -3,7 +3,7 @@ import controller.CompteController;
 public class Main {
 
     public static void main(String[] args) {
-        CompteController compte = CompteController.askAccountType();
+        CompteController compte = new CompteController(null);
         compte.fstMenu();
 
     }
