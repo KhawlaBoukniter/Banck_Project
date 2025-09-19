@@ -1,7 +1,7 @@
 package models;
 
 public class CompteEpargne extends Compte {
-    private Double tauxInteret = 0.2;
+    private Double tauxInteret = 0.02;
 
     public Double getTauxInteret() {
         return tauxInteret;
