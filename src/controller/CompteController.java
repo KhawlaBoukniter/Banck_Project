@@ -98,39 +98,45 @@ public class CompteController {
     }
 
     public void fstMenu() {
-        Integer fstChoice;
+        Integer fstChoice = null;
 
         do {
-            System.out.println("\nChoisissez votre action");
-            System.out.println("1. Créer un nouveau compte");
-            System.out.println("2. Gérer un compte existant");
-            System.out.println("3. Quitter");
-            System.out.print("Votre choix: ");
+            try {
+                System.out.println("\nChoisissez votre action");
+                System.out.println("1. Créer un nouveau compte");
+                System.out.println("2. Gérer un compte existant");
+                System.out.println("3. Quitter");
+                System.out.print("Votre choix: ");
 
-            fstChoice = sc.nextInt();
-            sc.nextLine();
+                fstChoice = sc.nextInt();
+                sc.nextLine();
 
-            switch (fstChoice) {
-                case 1:
-                    CompteController newCompte = askAccountType();
-                    break;
-                case 2:
-                    System.out.print("Veuillez entrer le code du compte à gérer : ");
-                    String code = sc.nextLine();
-                    if (comptes.containsKey(code)) {
-                        comptes.get(code).menu();
-                    } else {
-                        System.out.println("Compte introuvable");
-                    }
-                    break;
-                case 3:
-                    System.out.println("Sortie de l'application...");
-                    break;
-                default:
-                    System.out.println("Choix invalide");
-                    break;
+                switch (fstChoice) {
+                    case 1:
+                        CompteController newCompte = askAccountType();
+                        break;
+                    case 2:
+                        System.out.print("Veuillez entrer le code du compte à gérer : ");
+                        String code = sc.nextLine();
+                        if (comptes.containsKey(code)) {
+                            comptes.get(code).menu();
+                        } else {
+                            System.out.println("Compte introuvable");
+                        }
+                        break;
+                    case 3:
+                        System.out.println("Sortie de l'application...");
+                        break;
+                    default:
+                        System.out.println("Choix invalide");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Veuillez entrer un nombre valide");
+                fstChoice = sc.nextInt();
+                sc.nextLine();
             }
-        } while (fstChoice != 3);
+        } while (fstChoice == null || fstChoice != 3);
 
     }
 
