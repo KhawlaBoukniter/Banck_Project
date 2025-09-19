@@ -7,6 +7,7 @@ public abstract class Compte {
     protected Double solde;
     protected String code;
     protected ArrayList<Operation> listeOperations = new ArrayList<>();
+    private static Random random = new Random();
 
     public String getCode() {
         return code;
@@ -41,12 +42,9 @@ public abstract class Compte {
     }
 
     public String generateCode() {
-        Random random = new Random();
         Integer randomCode = 10000 + random.nextInt(90000);
 
-        String codeCompte = String.format("CPT-" + randomCode);
-
-        return codeCompte;
+        return "CPT-" + randomCode;
     }
 
 }
