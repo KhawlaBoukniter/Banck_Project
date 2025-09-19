@@ -3,6 +3,7 @@ package controller;
 import models.Compte;
 import models.CompteCourant;
 import models.CompteEpargne;
+import models.Operation;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -168,20 +169,26 @@ public class CompteController {
             return;
         }
 
+        System.out.println("Veullez entrer la destination (ex: 'Distributeur ATM', 'Chèque', 'Virement sortant')");
+        String destination = sc.nextLine();
+
+        System.out.println("Veuillez entrez la source (ex: 'Virement externe', 'Dépôt espèces', 'Salaire')");
+        String source = sc.nextLine();
+
         CompteController dest = comptes.get(codeDest);
         boolean success = false;
 
         if (compteModel instanceof CompteCourant) {
-            success = ((CompteCourant) compteModel).retirer(montant);
+            success = ((CompteCourant) compteModel).retirer(montant, destination);
         } else if (compteModel instanceof CompteEpargne) {
-            success = ((CompteEpargne) compteModel).retirer(montant);
+            success = ((CompteEpargne) compteModel).retirer(montant, destination);
         }
 
         if (success) {
             if (dest.compteModel instanceof CompteCourant) {
-                ((CompteCourant) dest.compteModel).verser(montant);
+                ((CompteCourant) dest.compteModel).verser(montant, source);
             } else if (dest.compteModel instanceof CompteEpargne) {
-                ((CompteEpargne) dest.compteModel).verser(montant);
+                ((CompteEpargne) dest.compteModel).verser(montant, source);
             }
             System.out.println("Virement effectué");
         } else {
@@ -203,8 +210,8 @@ public class CompteController {
 
     public void afficherOperations() {
         System.out.println("Les opérations effectuées sur ce compte:");
-        for (String op: compteModel.getListeOperations()) {
-            System.out.println(op + " , ");
+        for (Operation op: compteModel.getListeOperations()) {
+            System.out.println(op.getOperation());
         }
     }
 }
