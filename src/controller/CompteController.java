@@ -26,6 +26,10 @@ public class CompteController {
         Integer choix = sc.nextInt();
         sc.nextLine();
 
+        System.out.println("Veuillez entrer votre solde: ");
+        Double solde = sc.nextDouble();
+        sc.nextLine();
+
         Compte compte;
         if (choix == 1) {
             System.out.print("Veuillez entrer la découvert: ");
@@ -34,12 +38,10 @@ public class CompteController {
             compte = new CompteCourant();
             ((CompteCourant) compte).setDecouvert(decouvert);
         } else {
-            System.out.print("Veuillez entrer le taux d'intérêts: ");
-            Double taux = sc.nextDouble();
-            sc.nextLine();
             compte = new CompteEpargne();
-            ((CompteEpargne) compte).setTauxInteret(taux);
+
         }
+        compte.setSolde(solde);
 
         compte.setCode(compte.generateCode());
         CompteController compteController = new CompteController(compte);
