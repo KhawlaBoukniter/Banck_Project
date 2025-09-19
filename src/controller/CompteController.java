@@ -6,6 +6,7 @@ import models.CompteEpargne;
 import models.Operation;
 
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CompteController {
@@ -19,22 +20,67 @@ public class CompteController {
     }
 
     public static CompteController askAccountType() {
-        System.out.println("Choisissez le type de votre compte ?");
-        System.out.println("1. Compte courant");
-        System.out.println("2. Compte épargne");
+        Integer choix = null;
+        Double solde = null;
+        Double decouvert = null;
 
-        Integer choix = sc.nextInt();
-        sc.nextLine();
+        do {
+            try {
+                System.out.println("Choisissez le type de votre compte ?");
+                System.out.println("1. Compte courant");
+                System.out.println("2. Compte épargne");
 
-        System.out.println("Veuillez entrer votre solde: ");
-        Double solde = sc.nextDouble();
-        sc.nextLine();
+                choix = sc.nextInt();
+                sc.nextLine();
+
+                if (choix != 1 && choix != 2) {
+                    System.out.println("Votre choix est invalide");
+                    choix = null;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Veuillez entrer un choix valide");
+                choix = sc.nextInt();
+                sc.nextLine();
+            }
+        } while (choix == null);
+
+        do {
+            try {
+                System.out.println("Veuillez entrer votre solde: ");
+                solde = sc.nextDouble();
+                sc.nextLine();
+
+                if (solde < 0) {
+                    System.out.println("solde invalide");
+                    solde = null;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Entrer un nombre positif");
+                solde = sc.nextDouble();
+                sc.nextLine();
+            }
+
+        } while (solde == null);
 
         Compte compte;
         if (choix == 1) {
-            System.out.print("Veuillez entrer la découvert: ");
-            Double decouvert = sc.nextDouble();
-            sc.nextLine();
+            do {
+                try {
+                    System.out.print("Veuillez entrer la découvert: ");
+                    decouvert = sc.nextDouble();
+                    sc.nextLine();
+
+                    if (decouvert < 0) {
+                        System.out.println("La decouvert doit etre positive");
+                        decouvert = null;
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.print("Entrer une decouvet positive: ");
+                    decouvert = sc.nextDouble();
+                    sc.nextLine();
+                }
+            } while (decouvert == null);
+
             compte = new CompteCourant();
             ((CompteCourant) compte).setDecouvert(decouvert);
         } else {
