@@ -13,6 +13,13 @@ Fonctionnalités principales :
 
 ---
 
+## 📊 Planification et conception
+
+- 🔗 [Lien vers la planification Jira](https://boukniterkhawla.atlassian.net/jira/software/projects/CRM/boards/1?atlOrigin=eyJpIjoiOGQ2ZmQ0MDBhN2Y3NDk2ZmIyMzI4NWU1ODFkYTZkNjkiLCJwIjoiaiJ9)
+- 🖼️ Diagramme de classes :
+
+<img width="1284" height="488" alt="Image" src="https://github.com/user-attachments/assets/c2b681f5-186f-4518-8821-4c082c252c47" />
+
 ## 🛠️ Technologies utilisées
 - **Java 8** (OOP, Threads, Exceptions)
 - **Collections** : `HashMap`, `ArrayList`
