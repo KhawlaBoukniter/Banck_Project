@@ -86,6 +86,27 @@ public class CompteController {
         } else {
             compte = new CompteEpargne();
 
+            CompteEpargne epargneRef = (CompteEpargne) compte;
+            Thread thread = new Thread(() -> {
+                while (true) {
+                    synchronized (epargneRef) {
+                        Double interet = epargneRef.calculerInteret();
+                        if (interet != null && interet > 0) {
+                            epargneRef.verser(interet, "Intérêts périodiques");
+                            Double newSolde = epargneRef.getSolde();
+                        }
+                    }
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        break;
+                    }
+                }
+            });
+            thread.setDaemon(true);
+            thread.start();
+
         }
         compte.setSolde(solde);
 
