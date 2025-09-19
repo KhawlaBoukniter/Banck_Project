@@ -8,8 +8,17 @@ public class Retrait extends Operation {
         this.destination = destination;
     }
 
+    public Retrait(Double montant) {
+        super(montant);
+    }
+
     @Override
     public String getOperation() {
-        return "Retrait de: " + getMontant() + " vers " + destination + " le " + getDate();
+        if (destination == null) {
+            return getNumero() + " : Retrait de: " + getMontant();
+        } else {
+            return getNumero() + " : Retrait de: " + getMontant() + " vers " + destination + " le " + getDate();
+        }
+
     }
 }
