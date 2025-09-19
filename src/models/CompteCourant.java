@@ -14,7 +14,7 @@ public class CompteCourant extends Compte {
     }
 
     public Boolean retirer(Double montant) {
-        if (solde - montant >= -decouvert) {
+        if (solde - montant >= -decouvert && solde > 0) {
             solde -= montant;
             listeOperations.add(new Retrait(montant));
             return true;
@@ -23,7 +23,7 @@ public class CompteCourant extends Compte {
     }
 
     public Boolean retirer(Double montant, String destination) {
-        if (solde - montant >= -decouvert) {
+        if (solde - montant >= -decouvert && solde > 0) {
             solde -= montant;
             listeOperations.add(new Retrait(montant, destination));
             return true;
