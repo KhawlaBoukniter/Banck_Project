@@ -52,20 +52,40 @@ public class CompteController {
     }
 
     public void fstMenu() {
-        askAccountType();
-        System.out.println("\nChoisissez votre action");
-        System.out.println("1. Créer un nouveau compte");
-        System.out.println("2. Gérer un compte existant");
-        System.out.print("Votre choix: ");
+        Integer fstChoice;
 
-        Integer fstChoice = sc.nextInt();
-        sc.nextLine();
+        do {
+            System.out.println("\nChoisissez votre action");
+            System.out.println("1. Créer un nouveau compte");
+            System.out.println("2. Gérer un compte existant");
+            System.out.println("3. Quitter");
+            System.out.print("Votre choix: ");
 
-        if (fstChoice == 1) {
-            askAccountType();
-        } else {
-            menu();
-        }
+            fstChoice = sc.nextInt();
+            sc.nextLine();
+
+            switch (fstChoice) {
+                case 1:
+                    CompteController newCompte = askAccountType();
+                    break;
+                case 2:
+                    System.out.print("Veuillez entrer le code du compte à gérer : ");
+                    String code = sc.nextLine();
+                    if (comptes.containsKey(code)) {
+                        comptes.get(code).menu();
+                    } else {
+                        System.out.println("Compte introuvable");
+                    }
+                    break;
+                case 3:
+                    System.out.println("Sortie de l'application...");
+                    break;
+                default:
+                    System.out.println("Choix invalide");
+                    break;
+            }
+        } while (fstChoice != 3);
+
     }
 
     public void menu() {
@@ -107,7 +127,7 @@ public class CompteController {
                     System.out.println("Intérêts : " + compteModel.calculerInteret());
                     break;
                 case 8:
-                    System.out.println("Merci d'avoir utilisé notre application");
+                    System.out.println("Retour vers menu précédent...");
                     break;
                 default:
                     System.out.println("Choix invalide");
